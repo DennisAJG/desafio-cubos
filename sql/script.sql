@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (username, password, role)
-VALUES ('admin', 'secure_p4134046w0rd', 'admin');
+VALUES ('admin', 'secure_p410827w0rd', 'admin');

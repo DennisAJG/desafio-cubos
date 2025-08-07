@@ -1,5 +1,6 @@
 import http from 'http';
 import PG from 'pg';
+import clientProm from 'prom-client';
 
 const port = Number(process.env.PORT) || 3000;
 
@@ -15,13 +16,16 @@ const client = new PG.Client(
 
 let successfulConnection = false;
 
+const register = new clientProm.Registry();
+clientProm.collectDefaultMetrics({ register });
+
 setTimeout(async () => {
   try {
     await client.connect();
     successfulConnection = true;
-    console.log("✅ Conectado ao banco de dados com sucesso.");
+    console.log("Conectado ao banco de dados com sucesso.");
   } catch (err) {
-    console.error("❌ Erro ao conectar no banco de dados:", err.stack);
+    console.error("Erro ao conectar no banco de dados:", err.stack);
   }
 
   http.createServer(async (req, res) => {
@@ -38,10 +42,10 @@ setTimeout(async () => {
         try {
           const queryResult = await client.query("SELECT * FROM users");
           result = queryResult.rows[0];
-          console.log("👤 Resultado do banco:", result);
+          console.log("Resultado do banco:", result);
           isAdmin = result?.role === "admin";
         } catch (error) {
-          console.error("❌ Erro ao consultar usuários:", error);
+          console.error("Erro ao consultar usuários:", error);
         }
       }
 
@@ -51,12 +55,20 @@ setTimeout(async () => {
       };
 
       res.end(JSON.stringify(data));
+
+    } else if (req.url === "/metrics") {
+      // Endpoint de métricas Prometheus
+      res.setHeader('Content-Type', register.contentType);
+      res.writeHead(200);
+      res.end(await register.metrics());
+
     } else {
       res.writeHead(404);
       res.end("Not Found");
     }
 
   }).listen(port, () => {
-    console.log(`🚀 Servidor escutando na porta ${port}`);
+    console.log(`Servidor escutando na porta ${port}`);
   });
+
 }, 5000);

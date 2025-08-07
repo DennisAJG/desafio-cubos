@@ -70,13 +70,13 @@
 
           if (result?.database) {
             const h2 = document.createElement("h2");
-            h2.innerHTML = "✅ Database is up";
+            h2.innerHTML = "Database is up";
             document.body.appendChild(h2);
           }
 
           if (result?.userAdmin) {
             const h2 = document.createElement("h2");
-            h2.innerHTML = "✅ Migration runned";
+            h2.innerHTML = "Migration runned";
             document.body.appendChild(h2);
           }
 
@@ -86,9 +86,9 @@
             button.classList.add("disabled");
           }
         } catch (error) {
-          console.error("❌ Erro ao buscar /api:", error);
+          console.error("Erro ao buscar /api:", error);
           const h2 = document.createElement("h2");
-          h2.innerHTML = "❌ Erro ao conectar com o backend";
+          h2.innerHTML = "Erro ao conectar com o backend";
           document.body.appendChild(h2);
         }
       }
