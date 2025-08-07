@@ -46,7 +46,7 @@ Este projeto implementa uma infraestrutura **local e automatizada com Terraform*
 
 ---
 
-## ✅ Requisitos
+## Requisitos
 
 - [x] Backend acessa o banco com dados dinâmicos via script SQL
 - [x] Frontend acessa o backend via NGINX proxy_pass
@@ -59,13 +59,13 @@ Este projeto implementa uma infraestrutura **local e automatizada com Terraform*
 
 ---
 
-## ⚙️ Como rodar o projeto
+## Como rodar o projeto
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-projeto.git
-cd seu-projeto
+git clone https://github.com/DennisAJG/desafio-cubos.git
+cd desafio-cubos
 ```
 
 ### 2. Configure as variáveis de ambiente
@@ -73,10 +73,9 @@ cd seu-projeto
 Crie um arquivo `.env` na raiz:
 
 ```env
-DB_HOST=db_cubos
-DB_NAME=cubos
-DB_USER=cubos_user
-DB_PASS=cubos_pass
+DB_USER=admin
+DB_PASS=secure_p4$$w0rd
+DB_ROLE=admin
 DB_PORT=5432
 PORT=3000
 ```
@@ -99,7 +98,7 @@ terraform apply -auto-approve
 
 ---
 
-## 🌐 Endpoints
+## Endpoints
 
 | Serviço       | URL                       |
 |---------------|---------------------------|
@@ -112,7 +111,7 @@ terraform apply -auto-approve
 
 ---
 
-## 📊 Dashboards e Monitoramento
+## Dashboards e Monitoramento
 
 ### Prometheus
 
@@ -121,13 +120,14 @@ terraform apply -auto-approve
 
 ### Grafana
 
-- Dashboard pronto: `Docker Monitoring`
+- Dashboard pronto: `Docker Monitoring import 193`
 - Login padrão: `admin / admin`
+- Configure um Datasource `prometheus no localhost 9090`
 - Alerta configurado: **CPU acima de 80% por 1 minuto**
 
 ---
 
-## 🐘 Banco de dados
+## Banco de dados
 
 O container do PostgreSQL:
 
@@ -137,7 +137,7 @@ O container do PostgreSQL:
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - Docker
 - Terraform (provider `kreuzwerker/docker`)
@@ -150,7 +150,7 @@ O container do PostgreSQL:
 
 ---
 
-## 📌 Observações
+## Observações
 
 - O backend expõe métricas via `prom-client`
 - Todos os serviços são reiniciados automaticamente (`restart = always`)
@@ -160,7 +160,7 @@ O container do PostgreSQL:
 
 ---
 
-## 📣 Comandos Úteis
+## Comandos Úteis
 
 ```bash
 # Ver containers
@@ -175,7 +175,7 @@ terraform destroy -auto-approve
 
 ---
 
-## ✅ Checklist final do desafio
+## Checklist final do desafio
 
 - [x] Backend conecta ao banco via variáveis
 - [x] Frontend se comunica com backend (proxy_pass)
@@ -184,22 +184,22 @@ terraform destroy -auto-approve
 - [x] Prometheus e Grafana funcionando
 - [x] Métricas expostas e coletadas
 - [x] Dashboard Grafana com alerta
-- [x] Tudo documentado neste README ✅
+- [x] Tudo documentado neste README
 
 ---
 
-## 📧 Contato
+## Contato
 
-Desenvolvido por [Seu Nome]  
-Email: seunome@email.com  
-LinkedIn: [linkedin.com/in/seunome](https://linkedin.com/in/seunome)
+Desenvolvido por Dennis Augusto Gusmão  
+Email: dennis.gusmao@outlook.com  
+LinkedIn: https://www.linkedin.com/in/dennis-gusm%C3%A3o-16150b119/
 
 
-## 🛠️ Alterações Realizadas nos Arquivos Originais do Desafio
+## Alterações Realizadas nos Arquivos Originais do Desafio
 
 Durante o desenvolvimento da solução, foram realizadas alterações e melhorias nos arquivos fornecidos pela equipe do desafio. Abaixo estão listadas as modificações com suas respectivas justificativas:
 
-### 🔁 `backend/index.js`
+### `backend/index.js`
 **Original:**  
 - Não fazia tratamento de erro adequado para conexões falhas.  
 - Ausência de variáveis de ambiente nomeadas (`user`, `pass`, `host`, etc. não definidos).  
@@ -219,7 +219,7 @@ Melhorar a resiliência da aplicação, seguir boas práticas DevOps (observabil
 
 ---
 
-### 🔁 `backend/package.json`
+### `backend/package.json`
 **Original:**  
 - Apenas a dependência `pg` estava presente.  
 
@@ -232,7 +232,7 @@ Permitir que o Prometheus colete métricas do backend e seguir estrutura esperad
 
 ---
 
-### 🔁 `frontend/index.html`
+### `frontend/index.html`
 **Original:**  
 - A função `fetchAPI` utilizava `mode: 'no-cors'`, o que impedia o tratamento da resposta JSON.  
 - Nenhum tratamento de erro era feito em caso de falha de conexão.  
@@ -248,7 +248,7 @@ Melhorar a usabilidade e experiência visual do usuário, além de permitir debu
 
 ---
 
-### 📁 `sql/`
+### `sql/`
 **Original:**  
 - Apenas `script.sql` existia, com a criação da tabela `users` e inserção do admin.
 
