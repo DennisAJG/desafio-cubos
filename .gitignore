@@ -1,11 +1,31 @@
-# Terraform files
+# Estado e backups do Terraform
 *.tfstate
 *.tfstate.*
-*.tfvars
-.terraform/
-crash.log
+terraform.tfstate
+terraform.tfstate.backup
+
+# Planos e variáveis sensíveis
 *.tfplan
+*.tfvars
+*.tfvars.json
+
+# Diretórios e arquivos gerados pelo Terraform
+.terraform/
+.terraform.lock.hcl
+
+# Logs e crash reports
+crash.log
+*.log
+
+# Arquivos de configuração local
 .terraformrc
 terraform.rc
 
+# Arquivos de ambiente (.env)
 *.env
+.env.*
+
+# Diretórios ocultos gerados por editores
+.vscode/
+.idea/
+.DS_Store
